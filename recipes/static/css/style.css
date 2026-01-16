@@ -1,0 +1,29 @@
+/* Container width so side slides are visible */
+  .feedback-swiper-container {
+    max-width: 1040px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Base slide look */
+  .feedback-swiper .swiper-slide {
+    transition: transform .35s ease, filter .35s ease, opacity .35s ease;
+    transform: scale(.85);
+    opacity: .5;
+    filter: blur(2px);
+  }
+
+  /* The active (center) card */
+  .feedback-swiper .swiper-slide-active {
+    transform: scale(1);
+    opacity: 1;
+    filter: none;
+  }
+
+  /* The side cards */
+  .feedback-swiper .swiper-slide-next,
+  .feedback-swiper .swiper-slide-prev {
+    transform: scale(.92);
+    opacity: .8;
+    filter: blur(1.2px);
+  }

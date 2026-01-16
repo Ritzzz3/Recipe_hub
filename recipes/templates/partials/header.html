@@ -1,0 +1,75 @@
+{%load static%}
+<!-- Header -->
+<header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-2">
+                <img src="{% static 'imgs/logo.jpg'%}" alt="RecipeHub" class="h-10 w-10 rounded-full">
+                <span class="text-2xl font-bold text-orange-500 tracking-wide">Recipe<span
+                        class="text-gray-800">Hub</span></span>
+            </a>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="/" class="text-gray-700 hover:text-orange-500 font-medium transition">Home</a>
+                <a href="{% url 'all_recipe'%}" class="text-gray-700 hover:text-orange-500 font-medium transition">Recipes</a>
+                <a href="{% url 'all_category'%}" class="text-gray-700 hover:text-orange-500 font-medium transition">Categories</a>
+                <a href="{% url 'about'%}" class="text-gray-700 hover:text-orange-500 font-medium transition">About</a>
+                <a href="{% url 'contact'%}" class="text-gray-700 hover:text-orange-500 font-medium transition">Contact</a>
+            </nav>
+
+            <!-- Right Side: Search + Auth -->
+            <div class="flex items-center space-x-4">
+                <!-- Search -->
+                <form method="GET" action="{% url 'search' %}" class="hidden sm:flex">
+                    <input type="text" name="q" placeholder="Search recipes..."
+                        class="border border-gray-300 rounded-l px-3 py-1 focus:outline-none focus:ring-1 focus:ring-orange-500">
+                    <button type="submit"
+                        class="bg-orange-500 text-white px-3 rounded-r hover:bg-orange-600 transition">
+                        🔍
+                    </button>
+                </form>
+
+                <!-- button for add recipe -->
+                <a href="{% url 'addrecipe'%}"
+                    class="hidden sm:inline-block px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded transition">Add Recipe</a>
+
+                <!-- Buttons -->
+                <!-- <a href="/login/"
+                    class="hidden sm:inline-block px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded transition">Login</a>
+                <a href="/register/"
+                    class="hidden sm:inline-block px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded transition">Sign
+                    Up</a> -->
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                    ☰
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+        <nav class="flex flex-col space-y-2 p-4">
+            <a href="/" class="text-gray-700 hover:text-orange-500">Home</a>
+            <a href="{% url 'all_recipe'%}" class="text-gray-700 hover:text-orange-500">Recipes</a>
+            <a href="{% url 'all_category'%}" class="text-gray-700 hover:text-orange-500">Categories</a>
+            <a href="{% url 'about'%}" class="text-gray-700 hover:text-orange-500">About</a>
+            <a href="{% url 'contact'%}" class="text-gray-700 hover:text-orange-500">Contact</a>
+            <!-- <a href="/login/" class="text-gray-700 hover:text-orange-500">Login</a>
+            <a href="/register/" class="text-gray-700 hover:text-orange-500">Sign Up</a> -->
+        </nav>
+    </div>
+</header>
+
+<!-- Mobile Menu Toggle Script -->
+<script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold text-orange-500 mb-6">
+        {{ category.name }} Recipes
+    </h1>
+
+    {% if page_obj %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for recipe in page_obj %}
+
+            <div
+                class="bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl overflow-hidden transform hover:-translate-y-1 transition duration-300">
+            
+                <!-- Image -->
+                {% if recipe.image %}
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="h-52 w-full object-cover rounded-t-xl">
+                {% elif recipe.category.image %}
+                <img src="{{ recipe.category.image.url }}" alt="{{ recipe.title }}" class="h-52 w-full object-cover rounded-t-xl">
+                {% else %}
+                <img src="{% static 'recipes/images/default.jpg' %}" alt="{{ recipe.title }}"
+                    class="h-52 w-full object-cover rounded-t-xl">
+                {% endif %}
+            
+                <!-- Content -->
+                <div class="p-5">
+            
+                    <!-- Title + Rating in Same Row -->
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-lg font-semibold text-gray-800">{{ recipe.title }}</h3>
+            
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            {% for i in "12345" %}
+                            {% if recipe.avg_rating|add:0 >= i|add:0 %}
+                            <!-- Full Star -->
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 
+                                  1.902 0l1.347 4.134a1 1 0 
+                                  00.95.69h4.356c.969 0 1.371 1.24.588 
+                                  1.81l-3.523 2.56a1 1 0 
+                                  00-.364 1.118l1.347 4.134c.3.921-.755 
+                                  1.688-1.54 1.118l-3.523-2.56a1 1 
+                                  0 00-1.176 0l-3.523 2.56c-.784.57-1.838-.197-1.54-1.118l1.347-4.134a1 1 
+                                  0 00-.364-1.118L2.08 9.561c-.783-.57-.38-1.81.588-1.81h4.356a1 1 0 
+                                  00.95-.69l1.347-4.134z" />
+                            </svg>
+                            {% else %}
+                            <!-- Empty Star -->
+                            <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 
+                                  1.603-.921 1.902 0l1.347 4.134a1 1 0 
+                                  00.95.69h4.356c.969 0 1.371 1.24.588 
+                                  1.81l-3.523 2.56a1 1 0 
+                                  00-.364 1.118l1.347 4.134c.3.921-.755 
+                                  1.688-1.54 1.118l-3.523-2.56a1 1 
+                                  0 00-1.176 0l-3.523 2.56c-.784.57-1.838-.197-1.54-1.118l1.347-4.134a1 1 
+                                  0 00-.364-1.118L2.08 9.561c-.783-.57-.38-1.81.588-1.81h4.356a1 1 0 
+                                  00.95-.69l1.347-4.134z" />
+                            </svg>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+            
+                    <!-- Description -->
+                    <p class="text-gray-600 text-sm mb-4">{{ recipe.discription|truncatewords:15 }}</p>
+            
+                    <!-- Button -->
+                    <a href="{% url 'detail_recipe' recipe.slug %}"
+                        class="block text-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-lg font-medium hover:from-orange-600 hover:to-red-600 transition">
+                        View Recipe
+                    </a>
+                </div>
+            </div>
+
+
+            {% empty %}
+            <p class="text-center col-span-3 text-gray-500">No featured recipes yet.</p>
+            {% endfor %}
+        </div>
+
+        <!-- pagination -->
+         <div class="flex justify-center mt-8">
+        <nav class="flex space-x-2">
+            {% if page_obj.has_previous %}
+            <!-- if page_obj.has_previous -->
+            <a href="?page= {{ page_obj.previous_page_number }}"
+                class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">Prev</a>
+            {% endif %}
+            <!-- endif -->
+
+            {% for num in page_obj.paginator.page_range %}
+            <!-- for num in page_obj.paginator.page_range -->
+             {% if page_obj.number == num %}
+            <!-- if page_obj.number == num -->
+            <span class="px-3 py-1 bg-orange-500 text-white rounded">{{num}}</span>
+            <!-- else -->
+             {% else %}
+            <a href="?page={{num}}" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">{{num}}</a>
+            <!-- endif -->
+             {% endif %}
+            {% endfor %}
+
+            <!-- if page_obj.has_next -->
+             {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number}}"
+                class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">Next</a>
+            {% endif %}
+        </nav>
+    </div>
+
+    {% else %}
+    <p class="text-gray-500 mt-4">No recipes found for this category.</p>
+    {% endif %}
+</div>
+{% endblock %}

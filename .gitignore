@@ -1,0 +1,82 @@
+# ----------------------------
+# Python cache & compiled files
+# ----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ----------------------------
+# Virtual environments
+# ----------------------------
+env/
+venv/
+ENV/
+.venv/
+
+# ----------------------------
+# Environment variables
+# ----------------------------
+.env
+.env.*
+*.env
+
+# ----------------------------
+# Django specific
+# ----------------------------
+*.log
+# db.sqlite3
+db.sqlite3-journal
+# media/
+# staticfiles/
+
+# ----------------------------
+# Flask / FastAPI
+# ----------------------------
+instance/
+.webassets-cache
+
+# ----------------------------
+# Pytest / coverage
+# ----------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+.coverage.*
+
+# ----------------------------
+# Jupyter Notebook
+# ----------------------------
+.ipynb_checkpoints/
+
+# ----------------------------
+# IDE / Editor settings
+# ----------------------------
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# ----------------------------
+# OS files
+# ----------------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# Packaging / build
+# ----------------------------
+build/
+dist/
+*.egg-info/
+
+# ----------------------------
+# Logs
+# ----------------------------
+*.log
+
+# ----------------------------
+# Migrations (optional)
+# ----------------------------
+# Uncomment if you DON'T want to track migrations
+# **/migrations/
+# **/migrations/__pycache__/
